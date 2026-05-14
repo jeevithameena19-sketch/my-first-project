@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education - Jeevitha K S</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--border-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+            width: 50%;
+            padding-right: 3rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: 50%;
+            padding-right: 0;
+            padding-left: 3rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            right: -10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 4px solid var(--bg-color);
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+            right: auto;
+        }
+
+        .timeline-content {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+        }
+
+        .timeline-date {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 50px;
+                padding-right: 0;
+            }
+            .timeline-item:nth-child(even) {
+                margin-left: 0;
+                padding-left: 50px;
+            }
+            .timeline-dot {
+                left: 10px;
+                right: auto;
+            }
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="section fade-in">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;" class="fade-in delay-1">
+                <h2>My <span class="text-gradient">Education</span></h2>
+                <p style="color: var(--text-muted);">A summary of my academic background and qualifications.</p>
+            </div>
+
+            <div class="timeline">
+                <!-- Education Item 1 -->
+                <div class="timeline-item fade-in delay-2">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Pursuing</span>
+                        <h3 class="timeline-title">B.C.A</h3>
+                        <div class="timeline-subtitle">Govt. First Grade Womens College, Tumkur (Tumkur University)</div>
+                        <p class="timeline-desc">Currently perceiving Bachelor of Computer Applications with a CGPA of 7.9%.</p>
+                    </div>
+                </div>
+
+                <!-- Education Item 2 -->
+                <div class="timeline-item fade-in delay-3">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Completed</span>
+                        <h3 class="timeline-title">PUC</h3>
+                        <div class="timeline-subtitle">Govt. PU College, Banasandra, Turuvekere tq (PU Board)</div>
+                        <p class="timeline-desc">Completed Pre-University College with 75.00%.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="layout.js"></script>
+</body>
+</html>
