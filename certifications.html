@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certifications — Meenakumari B.M</title>
+    <meta name="description" content="View certifications and achievements of Meenakumari B.M.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .certs-section {
+            padding: var(--section-padding) 0;
+        }
+
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .cert-card {
+            background: var(--gradient-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .cert-preview {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--bg-tertiary), var(--surface));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-preview-icon {
+            font-size: 4rem;
+            opacity: 0.5;
+            transition: var(--transition-smooth);
+        }
+
+        .cert-card:hover .cert-preview-icon {
+            transform: scale(1.15) rotate(5deg);
+            opacity: 0.8;
+        }
+
+        .cert-preview-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 10, 26, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .cert-card:hover .cert-preview-overlay {
+            opacity: 1;
+        }
+
+        .cert-view-btn {
+            padding: 0.6rem 1.5rem;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transform: translateY(10px);
+            transition: var(--transition-smooth);
+        }
+
+        .cert-card:hover .cert-view-btn {
+            transform: translateY(0);
+        }
+
+        .cert-info {
+            padding: 1.5rem 2rem;
+        }
+
+        .cert-issuer {
+            font-size: 0.75rem;
+            color: var(--accent-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .cert-info h3 {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .cert-date {
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* Modal */
+        .cert-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(10, 10, 26, 0.95);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .cert-modal.active {
+            display: flex;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            max-width: 700px;
+            width: 100%;
+            background: var(--surface);
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+            overflow: hidden;
+            position: relative;
+            animation: modalSlideIn 0.4s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(135deg, var(--bg-tertiary), var(--surface));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .modal-image .placeholder-icon {
+            font-size: 5rem;
+            opacity: 0.4;
+        }
+
+        .modal-info {
+            padding: 2rem;
+        }
+
+        .modal-info h2 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-info .modal-issuer {
+            color: var(--accent-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-info p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Add Certificate CTA */
+        .add-cert-card {
+            background: var(--gradient-card);
+            border: 2px dashed var(--border-subtle);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: var(--transition-smooth);
+            cursor: default;
+            min-height: 350px;
+        }
+
+        .add-cert-card:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .add-cert-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(124, 58, 237, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .add-cert-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .add-cert-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .certs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page-content">
+        <section class="certs-section">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <span class="section-tag">Certifications</span>
+                    <h1 class="section-title">My <span class="highlight">Achievements</span></h1>
+                    <p class="section-desc">Professional certifications and recognitions that validate my skills and knowledge.</p>
+                </div>
+
+                <div class="certs-grid">
+                    <!-- Placeholder Certificate 1 -->
+                    <div class="cert-card fade-up delay-1" onclick="openModal('cert1')">
+                        <div class="cert-preview">
+                            <span class="cert-preview-icon">🏅</span>
+                            <div class="cert-preview-overlay">
+                                <span class="cert-view-btn">View Certificate</span>
+                            </div>
+                        </div>
+                        <div class="cert-info">
+                            <span class="cert-issuer">Certificate</span>
+                            <h3>Certificate Placeholder</h3>
+                            <p>Your certificate details will appear here once added.</p>
+                            <div class="cert-date">📅 Date — To be updated</div>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder Certificate 2 -->
+                    <div class="cert-card fade-up delay-2" onclick="openModal('cert2')">
+                        <div class="cert-preview">
+                            <span class="cert-preview-icon">📜</span>
+                            <div class="cert-preview-overlay">
+                                <span class="cert-view-btn">View Certificate</span>
+                            </div>
+                        </div>
+                        <div class="cert-info">
+                            <span class="cert-issuer">Certificate</span>
+                            <h3>Certificate Placeholder</h3>
+                            <p>Your certificate details will appear here once added.</p>
+                            <div class="cert-date">📅 Date — To be updated</div>
+                        </div>
+                    </div>
+
+                    <!-- Add More CTA -->
+                    <div class="add-cert-card fade-up delay-3">
+                        <div class="add-cert-icon">➕</div>
+                        <h3>More Coming Soon</h3>
+                        <p>Certificates will be added here as they are earned. Stay tuned!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div class="cert-modal" id="certModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div class="modal-image" id="modalImage">
+                <span class="placeholder-icon">🏅</span>
+            </div>
+            <div class="modal-info">
+                <h2 id="modalTitle">Certificate Title</h2>
+                <p class="modal-issuer" id="modalIssuer">Issuing Organization</p>
+                <p id="modalDesc">Certificate details will appear here.</p>
+                <div class="modal-actions">
+                    <a href="#" class="btn btn-primary" id="modalDownload" download>
+                        <span>📥</span>
+                        <span>Download</span>
+                    </a>
+                    <button class="btn btn-outline" onclick="closeModal()">
+                        <span>✕</span>
+                        <span>Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="layout.js"></script>
+    <script>
+        function openModal(certId) {
+            document.getElementById('certModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('certModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close on background click
+        document.getElementById('certModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('certModal')) {
+                closeModal();
+            }
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+</html>

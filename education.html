@@ -3,153 +3,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education - Jeevitha K S</title>
+    <title>Education — Meenakumari B.M</title>
+    <meta name="description" content="Education timeline and academic achievements of Meenakumari B.M.">
     <link rel="stylesheet" href="styles.css">
     <style>
+        .education-section {
+            padding: var(--section-padding) 0;
+        }
+
+        /* ========================================
+           TIMELINE
+           ======================================== */
         .timeline {
             position: relative;
             max-width: 800px;
-            margin: 4rem auto;
-            padding: 2rem 0;
+            margin: 0 auto;
         }
 
         .timeline::before {
             content: '';
             position: absolute;
-            top: 0;
             left: 50%;
-            width: 2px;
-            height: 100%;
-            background: var(--border-color);
             transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            border-radius: 3px;
         }
 
         .timeline-item {
-            margin-bottom: 3rem;
             position: relative;
+            padding: 2rem 0;
             width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
             padding-right: 3rem;
+            text-align: right;
         }
 
         .timeline-item:nth-child(even) {
-            margin-left: 50%;
-            padding-right: 0;
+            left: 50%;
             padding-left: 3rem;
         }
 
+        /* Timeline dot */
         .timeline-dot {
             position: absolute;
-            top: 0;
-            right: -10px;
+            top: 2.5rem;
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: var(--primary);
-            border: 4px solid var(--bg-color);
-            z-index: 1;
-            box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+            background: var(--gradient-primary);
+            border: 4px solid var(--bg-primary);
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
         }
 
         .timeline-item:nth-child(even) .timeline-dot {
             left: -10px;
-            right: auto;
         }
 
-        .timeline-content {
-            background: var(--surface-color);
+        /* Timeline card */
+        .timeline-card {
+            background: var(--gradient-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
             padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: var(--transition-smooth);
+            position: relative;
         }
 
-        .timeline-content:hover {
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            width: 20px;
+            height: 20px;
+            background: var(--gradient-card);
+            border: 1px solid var(--border-subtle);
+            transform: rotate(45deg);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-card::before {
+            right: -11px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .timeline-item:nth-child(even) .timeline-card::before {
+            left: -11px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .timeline-card:hover {
             transform: translateY(-5px);
-            border-color: var(--secondary);
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-glow);
         }
 
-        .timeline-date {
-            color: var(--primary);
-            font-size: 0.9rem;
+        .timeline-year {
+            display: inline-block;
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-secondary);
+            background: rgba(6, 182, 212, 0.1);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-institution {
+            font-size: 0.9rem;
+            color: var(--accent-tertiary);
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline-detail-icon {
+            font-size: 0.9rem;
+        }
+
+        .grade-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 0.5rem;
+        }
+
+        .timeline-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           STATS RIBBON
+           ======================================== */
+        .edu-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .edu-stat-card {
+            background: var(--gradient-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+
+        .edu-stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .edu-stat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .edu-stat-value {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .edu-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-            display: block;
+            margin-top: 0.3rem;
         }
 
-        .timeline-title {
-            font-size: 1.5rem;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-
-        .timeline-desc {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
         @media (max-width: 768px) {
             .timeline::before {
                 left: 20px;
             }
+
             .timeline-item {
                 width: 100%;
-                padding-left: 50px;
-                padding-right: 0;
+                padding-left: 50px !important;
+                padding-right: 0 !important;
+                text-align: left !important;
             }
+
             .timeline-item:nth-child(even) {
-                margin-left: 0;
-                padding-left: 50px;
+                left: 0;
             }
+
             .timeline-dot {
-                left: 10px;
-                right: auto;
+                left: 10px !important;
+                right: auto !important;
             }
-            .timeline-item:nth-child(even) .timeline-dot {
-                left: 10px;
+
+            .timeline-card::before {
+                left: -11px !important;
+                right: auto !important;
+                border-right: none !important;
+                border-top: none !important;
+                border-left: 1px solid var(--border-subtle) !important;
+                border-bottom: 1px solid var(--border-subtle) !important;
+            }
+
+            .edu-stats {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <main class="page-content">
+        <section class="education-section">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <span class="section-tag">Education</span>
+                    <h1 class="section-title">My Academic <span class="highlight">Journey</span></h1>
+                    <p class="section-desc">A timeline of my educational milestones and accomplishments.</p>
+                </div>
 
-    <main class="section fade-in">
-        <div class="container">
-            <div style="text-align: center; margin-bottom: 3rem;" class="fade-in delay-1">
-                <h2>My <span class="text-gradient">Education</span></h2>
-                <p style="color: var(--text-muted);">A summary of my academic background and qualifications.</p>
-            </div>
+                <div class="timeline">
+                    <!-- BCA -->
+                    <div class="timeline-item fade-up delay-1">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="timeline-year">Pursuing</span>
+                            <h3>Bachelor of Computer Applications (BCA)</h3>
+                            <p class="timeline-institution">📍 Govt. First Grade Women's College, Tumkur</p>
+                            <div class="timeline-details">
+                                <span class="timeline-detail">
+                                    <span class="timeline-detail-icon">🏛️</span> Tumkur University
+                                </span>
+                            </div>
+                            <div class="grade-badge">📊 7.7 CGPA</div>
+                        </div>
+                    </div>
 
-            <div class="timeline">
-                <!-- Education Item 1 -->
-                <div class="timeline-item fade-in delay-2">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">Pursuing</span>
-                        <h3 class="timeline-title">B.C.A</h3>
-                        <div class="timeline-subtitle">Govt. First Grade Womens College, Tumkur (Tumkur University)</div>
-                        <p class="timeline-desc">Currently perceiving Bachelor of Computer Applications with a CGPA of 7.9%.</p>
+                    <!-- PUC -->
+                    <div class="timeline-item fade-up delay-2">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="timeline-year">Completed</span>
+                            <h3>Pre-University Course (PUC)</h3>
+                            <p class="timeline-institution">📍 Morarji Desai Res. PU College, Bachchalli</p>
+                            <div class="timeline-details">
+                                <span class="timeline-detail">
+                                    <span class="timeline-detail-icon">🏛️</span> PU Board
+                                </span>
+                            </div>
+                            <div class="grade-badge">📊 67.00%</div>
+                        </div>
+                    </div>
+
+                    <!-- SSLC -->
+                    <div class="timeline-item fade-up delay-3">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <span class="timeline-year">Completed</span>
+                            <h3>SSLC (10th Standard)</h3>
+                            <p class="timeline-institution">📍 Kittur Rani Channamma Residential High School, Chikkahalli, Pavagada Tq</p>
+                            <div class="timeline-details">
+                                <span class="timeline-detail">
+                                    <span class="timeline-detail-icon">🏛️</span> K.S.E.E.B
+                                </span>
+                            </div>
+                            <div class="grade-badge">📊 80.00%</div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Education Item 2 -->
-                <div class="timeline-item fade-in delay-3">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">Completed</span>
-                        <h3 class="timeline-title">PUC</h3>
-                        <div class="timeline-subtitle">Govt. PU College, Banasandra, Turuvekere tq (PU Board)</div>
-                        <p class="timeline-desc">Completed Pre-University College with 75.00%.</p>
+                <!-- Stats -->
+                <div class="edu-stats">
+                    <div class="edu-stat-card fade-up delay-1">
+                        <div class="edu-stat-icon">🎓</div>
+                        <div class="edu-stat-value">BCA</div>
+                        <div class="edu-stat-label">Current Degree</div>
+                    </div>
+                    <div class="edu-stat-card fade-up delay-2">
+                        <div class="edu-stat-icon">📈</div>
+                        <div class="edu-stat-value">7.7</div>
+                        <div class="edu-stat-label">Current CGPA</div>
+                    </div>
+                    <div class="edu-stat-card fade-up delay-3">
+                        <div class="edu-stat-icon">🏅</div>
+                        <div class="edu-stat-value">80%</div>
+                        <div class="edu-stat-label">Best Score (SSLC)</div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
     <script src="layout.js"></script>

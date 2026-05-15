@@ -3,205 +3,539 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Jeevitha K S</title>
+    <title>About — Meenakumari B.M</title>
+    <meta name="description" content="Learn more about Meenakumari B.M — skills, personal profile, and professional summary.">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* ========================================
+           ABOUT PAGE
+           ======================================== */
+        .about-hero {
+            padding: var(--section-padding) 0;
+        }
+
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
+            grid-template-columns: 1fr 1.2fr;
             gap: 4rem;
             align-items: center;
-            margin-top: 2rem;
+            margin-bottom: 5rem;
         }
 
-        .about-image {
+        /* Photo Side */
+        .about-photo-section {
+            position: relative;
+        }
+
+        .about-photo-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            max-width: 380px;
+        }
+
+        .about-photo-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(10, 10, 26, 0.8));
+            z-index: 1;
+        }
+
+        .about-photo-wrapper img {
             width: 100%;
-            max-width: 400px;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border-color);
-            margin: 0 auto;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
         }
 
-        .about-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-main);
+        .about-photo-wrapper:hover img {
+            transform: scale(1.03);
         }
 
-        .about-content p {
-            color: var(--text-muted);
-            margin-bottom: 1.2rem;
-            font-size: 1.1rem;
+        .about-photo-border {
+            position: absolute;
+            inset: -4px;
+            border-radius: 24px;
+            background: var(--gradient-primary);
+            z-index: -1;
+            opacity: 0.5;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin: 2.5rem 0;
-        }
-
-        .stat-card {
-            background: var(--surface-color);
-            padding: 1.5rem;
+        .about-experience-badge {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            z-index: 2;
+            background: rgba(10, 10, 26, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 1rem 1.5rem;
             border-radius: 12px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            border: 1px solid var(--border-subtle);
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
+        .about-experience-badge .badge-number {
             font-family: var(--font-heading);
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+        .about-experience-badge .badge-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .resume-action {
-            margin-top: 2rem;
+        /* Info Side */
+        .about-info {
+            position: relative;
+        }
+
+        .about-intro {
+            font-family: var(--font-accent);
+            font-size: 1.3rem;
+            color: var(--accent-secondary);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .about-bio {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 2rem;
+        }
+
+        .about-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .detail-item {
+            display: flex;
+            gap: 0.8rem;
+            align-items: flex-start;
+        }
+
+        .detail-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+
+        .detail-text .detail-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .detail-text .detail-value {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .about-actions {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* ========================================
+           SKILLS SECTION
+           ======================================== */
+        .skills-section {
+            padding: var(--section-padding) 0;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--gradient-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .skill-card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--gradient-primary);
+            display: flex;
             align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
-        .skills-container {
-            margin: 2rem 0;
-        }
-
-        .skills-title {
-            font-size: 1.2rem;
-            color: var(--text-main);
-            margin-bottom: 1rem;
+        .skill-card h3 {
             font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
         }
 
-        .skills-list {
+        .skill-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .skill-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.8rem;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
 
         .skill-tag {
+            font-size: 0.75rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
             background: rgba(6, 182, 212, 0.1);
-            color: var(--primary);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
             border: 1px solid rgba(6, 182, 212, 0.2);
-            transition: all 0.3s ease;
+            color: var(--accent-secondary);
+            font-weight: 500;
+            transition: var(--transition-fast);
         }
 
         .skill-tag:hover {
-            background: var(--primary);
-            color: white;
+            background: rgba(6, 182, 212, 0.2);
             transform: translateY(-2px);
         }
 
-        @media (max-width: 992px) {
+        /* ========================================
+           PERSONAL PROFILE
+           ======================================== */
+        .profile-section {
+            padding: var(--section-padding) 0;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .profile-card {
+            background: var(--gradient-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            transition: var(--transition-smooth);
+        }
+
+        .profile-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .profile-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .profile-card-info h4 {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.2rem;
+        }
+
+        .profile-card-info p {
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 768px) {
             .about-grid {
                 grid-template-columns: 1fr;
-                gap: 3rem;
-                text-align: center;
+                gap: 2rem;
             }
-            .resume-action {
-                justify-content: center;
+
+            .about-photo-wrapper {
+                max-width: 300px;
+                margin: 0 auto;
             }
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 576px) {
-            .stats-grid {
+
+            .about-details {
                 grid-template-columns: 1fr;
+            }
+
+            .about-actions {
+                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
-
-    <main class="section fade-in">
-        <div class="container">
-            <div class="about-grid">
-                <div class="fade-in delay-1">
-                    <img src="jeevi1711.jpeg" alt="Jeevitha K S" class="about-image">
+    <main class="page-content">
+        <!-- About Hero -->
+        <section class="about-hero">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <span class="section-tag">About Me</span>
+                    <h1 class="section-title">Know Who <span class="highlight">I Am</span></h1>
+                    <p class="section-desc">A glimpse into my journey, skills, and the values that drive me forward.</p>
                 </div>
-                
-                <div class="about-content fade-in delay-2">
-                    <h2><span class="text-gradient">About Me</span></h2>
-                    <p>
-                        I have a strong desire to redefine teaching standards. With excellent communication skills and fluency in English, I am adept at accepting challenges and demonstrating leadership quality.
-                    </p>
-                    <p>
-                        I have working knowledge of computers and the internet, and I am always eager to learn and grow in professional environments.
-                    </p>
-                    
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number" style="font-size: 1.2rem;">17-08-2005</div>
-                            <div class="stat-label">Date of Birth</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" style="font-size: 1.2rem;">Kannada, English</div>
-                            <div class="stat-label">Languages</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" style="font-size: 1.2rem;">Srinivas</div>
-                            <div class="stat-label">Father's Name</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" style="font-size: 1.2rem;">Female</div>
-                            <div class="stat-label">Gender</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" style="font-size: 1.2rem;">Hindu</div>
-                            <div class="stat-label">Religion</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" style="font-size: 1.2rem;">Unmarried</div>
-                            <div class="stat-label">Marital Status</div>
-                        </div>
-                        <div class="stat-card" style="grid-column: 1 / -1; max-width: 300px; justify-self: center; width: 100%;">
-                            <div class="stat-number" style="font-size: 1.2rem;">Indian</div>
-                            <div class="stat-label">Nationality</div>
+
+                <div class="about-grid">
+                    <!-- Photo -->
+                    <div class="about-photo-section fade-left">
+                        <div class="about-photo-border"></div>
+                        <div class="about-photo-wrapper">
+                            <img src="WhatsApp Image 2026-05-14 at 5.31.58 AM.jpeg" alt="Meenakumari B.M">
+                            <div class="about-experience-badge">
+                                <div class="badge-number">BCA</div>
+                                <div class="badge-label">Pursuing</div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="skills-container">
-                        <h3 class="skills-title">My Skills</h3>
-                        <div class="skills-list">
-                            <span class="skill-tag">Communication</span>
-                            <span class="skill-tag">Leadership</span>
-                            <span class="skill-tag">Basic Computer Skills</span>
-                            <span class="skill-tag">Internet Navigation</span>
-                            <span class="skill-tag">English Fluency</span>
-                        </div>
-                    </div>
+                    <!-- Info -->
+                    <div class="about-info fade-right">
+                        <p class="about-intro">"Accepting challenges and climbing the career ladder through continuous learning."</p>
+                        <p class="about-bio">
+                            I am Meenakumari B.M, currently pursuing my Bachelor of Computer Applications (BCA) at Govt. First Grade Women's College, Tumkur. I have a strong desire to redefine teaching standards with excellent communication skills and fluency in English. I'm adept at accepting challenges and demonstrating leadership quality.
+                        </p>
+                        <p class="about-bio">
+                            My career objective is to build a career in a growing organization where I can prove my abilities, fulfill organizational goals, and climb the career ladder through continuous learning and commitment.
+                        </p>
 
-                    <div class="resume-action">
-                        <a href="jeevi%20resume.docx" download class="btn btn-primary">
-                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.2em" width="1.2em" xmlns="http://www.w3.org/2000/svg"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                            Download Resume
-                        </a>
-                        <a href="contact.html" class="btn btn-outline">Let's Talk</a>
+                        <div class="about-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">📧</div>
+                                <div class="detail-text">
+                                    <span class="detail-label">Email</span>
+                                    <span class="detail-value">kumarimeena09251@gmail.com</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">📱</div>
+                                <div class="detail-text">
+                                    <span class="detail-label">Phone</span>
+                                    <span class="detail-value">+91 8431551043</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">📍</div>
+                                <div class="detail-text">
+                                    <span class="detail-label">Location</span>
+                                    <span class="detail-value">Pavagada, Tumkur Dist.</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">🎂</div>
+                                <div class="detail-text">
+                                    <span class="detail-label">Date of Birth</span>
+                                    <span class="detail-value">31-05-2005</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="about-actions">
+                            <a href="meena123.docx" download class="btn btn-primary">
+                                <span>📄</span>
+                                <span>Download Resume</span>
+                            </a>
+                            <a href="contact.html" class="btn btn-outline">
+                                <span>💬</span>
+                                <span>Get in Touch</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills-section">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <span class="section-tag">My Skills</span>
+                    <h2 class="section-title">What I <span class="highlight">Bring</span></h2>
+                </div>
+
+                <div class="skills-grid">
+                    <div class="skill-card fade-up delay-1">
+                        <div class="skill-card-icon">💬</div>
+                        <h3>Communication</h3>
+                        <p>Excellent communication skills with fluency in English, adept at conveying ideas clearly and effectively.</p>
+                        <div class="skill-tags">
+                            <span class="skill-tag">English</span>
+                            <span class="skill-tag">Kannada</span>
+                            <span class="skill-tag">Telugu</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card fade-up delay-2">
+                        <div class="skill-card-icon">👩‍💻</div>
+                        <h3>Computer Skills</h3>
+                        <p>Working knowledge of computers and internet navigation, with ongoing education in Computer Applications.</p>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Basic Computing</span>
+                            <span class="skill-tag">Internet</span>
+                            <span class="skill-tag">MS Office</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card fade-up delay-3">
+                        <div class="skill-card-icon">🏆</div>
+                        <h3>Leadership</h3>
+                        <p>Strong leadership qualities with a proven ability to accept challenges and guide team efforts effectively.</p>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Team Work</span>
+                            <span class="skill-tag">Problem Solving</span>
+                            <span class="skill-tag">Initiative</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card fade-up delay-4">
+                        <div class="skill-card-icon">📚</div>
+                        <h3>Academic Excellence</h3>
+                        <p>Consistent academic performer with 80% in SSLC and currently maintaining a strong CGPA of 7.7 in BCA.</p>
+                        <div class="skill-tags">
+                            <span class="skill-tag">BCA</span>
+                            <span class="skill-tag">7.7 CGPA</span>
+                            <span class="skill-tag">Dedicated</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Personal Profile -->
+        <section class="profile-section">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <span class="section-tag">Personal Profile</span>
+                    <h2 class="section-title">More About <span class="highlight">Me</span></h2>
+                </div>
+
+                <div class="profile-grid">
+                    <div class="profile-card fade-up delay-1">
+                        <div class="profile-card-icon">👤</div>
+                        <div class="profile-card-info">
+                            <h4>Full Name</h4>
+                            <p>Meenakumari B.M</p>
+                        </div>
+                    </div>
+                    <div class="profile-card fade-up delay-2">
+                        <div class="profile-card-icon">🎂</div>
+                        <div class="profile-card-info">
+                            <h4>Date of Birth</h4>
+                            <p>31-05-2005</p>
+                        </div>
+                    </div>
+                    <div class="profile-card fade-up delay-3">
+                        <div class="profile-card-icon">👨</div>
+                        <div class="profile-card-info">
+                            <h4>Father's Name</h4>
+                            <p>Marappa</p>
+                        </div>
+                    </div>
+                    <div class="profile-card fade-up delay-4">
+                        <div class="profile-card-icon">♀️</div>
+                        <div class="profile-card-info">
+                            <h4>Gender</h4>
+                            <p>Female</p>
+                        </div>
+                    </div>
+                    <div class="profile-card fade-up delay-5">
+                        <div class="profile-card-icon">🙏</div>
+                        <div class="profile-card-info">
+                            <h4>Religion</h4>
+                            <p>Hindu</p>
+                        </div>
+                    </div>
+                    <div class="profile-card fade-up delay-6">
+                        <div class="profile-card-icon">💍</div>
+                        <div class="profile-card-info">
+                            <h4>Marital Status</h4>
+                            <p>Unmarried</p>
+                        </div>
+                    </div>
+                    <div class="profile-card fade-up delay-1">
+                        <div class="profile-card-icon">🇮🇳</div>
+                        <div class="profile-card-info">
+                            <h4>Nationality</h4>
+                            <p>Indian</p>
+                        </div>
+                    </div>
+                    <div class="profile-card fade-up delay-2">
+                        <div class="profile-card-icon">🗣️</div>
+                        <div class="profile-card-info">
+                            <h4>Languages Known</h4>
+                            <p>Kannada, English & Telugu</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script src="layout.js"></script>

@@ -3,135 +3,487 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeevitha K S - Professional Portfolio</title>
-    <meta name="description" content="Welcome to the professional portfolio of Jeevitha K S.">
+    <title>Meenakumari B.M — Portfolio</title>
+    <meta name="description" content="Welcome to the professional portfolio of Meenakumari B.M. Explore my work, skills, and achievements.">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Hero Section Specific Styles */
+        /* ========================================
+           HERO SECTION
+           ======================================== */
         .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: var(--container-max);
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 4rem;
+            align-items: center;
         }
 
+        /* Left Content */
         .hero-content {
-            flex: 1;
+            position: relative;
+            z-index: 2;
         }
 
-        .hero-subtitle {
-            color: var(--primary);
-            font-weight: 600;
+        .hero-greeting {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--accent-secondary);
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 1rem;
-            display: block;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
         }
 
-        .hero-title {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            color: var(--text-main);
+        .hero-greeting::before {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background: var(--accent-secondary);
+            display: inline-block;
+        }
+
+        .hero-name {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-name .first-name {
+            display: block;
+            color: var(--text-primary);
+        }
+
+        .hero-name .last-name {
+            display: block;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-role {
+            font-family: var(--font-heading);
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            min-height: 2rem;
         }
 
         .hero-desc {
-            color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 500px;
             margin-bottom: 2.5rem;
-            max-width: 600px;
         }
 
         .hero-actions {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        .hero-image-wrapper {
-            flex: 1;
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.2rem;
+        }
+
+        /* Right - Photo */
+        .hero-visual {
             display: flex;
             justify-content: center;
+            align-items: center;
             position: relative;
         }
 
-        .hero-image {
-            width: 350px;
-            height: 350px;
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            object-fit: cover;
-            border: 4px solid var(--surface-color);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            animation: morph 8s ease-in-out infinite;
+        .photo-wrapper {
             position: relative;
+            width: 380px;
+            height: 380px;
+        }
+
+        /* Rotating border */
+        .photo-ring {
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--accent-primary),
+                var(--accent-secondary),
+                var(--accent-tertiary),
+                var(--accent-primary)
+            );
+            animation: rotateGradient 6s linear infinite;
+            padding: 4px;
+        }
+
+        .photo-ring-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--bg-primary);
+        }
+
+        .photo-container {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--bg-primary);
             z-index: 2;
         }
 
-        .hero-blob {
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .photo-wrapper:hover .photo-container img {
+            transform: scale(1.05);
+        }
+
+        /* Decorative dots */
+        .hero-dots {
             position: absolute;
+            width: 120px;
+            height: 120px;
+            background-image: radial-gradient(circle, var(--accent-primary) 1.5px, transparent 1.5px);
+            background-size: 15px 15px;
+            opacity: 0.3;
+        }
+
+        .hero-dots-1 {
+            top: -30px;
+            right: -30px;
+        }
+
+        .hero-dots-2 {
+            bottom: -30px;
+            left: -30px;
+        }
+
+        /* Floating icons */
+        .float-icon {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 4s ease-in-out infinite;
+            z-index: 3;
+            filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.3));
+        }
+
+        .float-icon-1 {
+            top: 10%;
+            right: 5%;
+            animation-delay: 0s;
+        }
+
+        .float-icon-2 {
+            bottom: 15%;
+            left: 5%;
+            animation-delay: -1.5s;
+        }
+
+        .float-icon-3 {
             top: 50%;
+            right: -5%;
+            animation-delay: -3s;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(139, 92, 246, 0.2));
-            filter: blur(40px);
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .scroll-mouse {
+            width: 24px;
+            height: 38px;
+            border: 2px solid var(--text-muted);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .scroll-mouse::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: var(--accent-secondary);
+            border-radius: 2px;
+            animation: scrollDot 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollDot {
+            0%, 100% { top: 6px; opacity: 1; }
+            50% { top: 20px; opacity: 0.3; }
+        }
+
+        /* Particles */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--accent-primary);
             border-radius: 50%;
-            z-index: 1;
-            animation: pulse 6s infinite alternate;
+            opacity: 0;
+            animation: particleFloat 8s ease-in-out infinite;
         }
 
-        @keyframes morph {
-            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-            50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
-            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        @keyframes particleFloat {
+            0% { opacity: 0; transform: translateY(100vh) scale(0); }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { opacity: 0; transform: translateY(-10vh) scale(1); }
         }
 
-        @keyframes pulse {
-            0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.7; }
-            100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
-        }
-
-        @media (max-width: 992px) {
-            .hero {
-                flex-direction: column-reverse;
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 968px) {
+            .hero-container {
+                grid-template-columns: 1fr;
                 text-align: center;
-                margin-top: 2rem;
+                gap: 3rem;
             }
-            .hero-title { font-size: 3rem; }
-            .hero-desc { margin: 0 auto 2.5rem; }
-            .hero-actions { justify-content: center; }
-            .hero-image { width: 280px; height: 280px; }
-            .hero-blob { width: 320px; height: 320px; }
+
+            .hero-content {
+                order: 2;
+            }
+
+            .hero-visual {
+                order: 1;
+            }
+
+            .hero-greeting {
+                justify-content: center;
+            }
+
+            .hero-desc {
+                margin: 0 auto 2.5rem;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .photo-wrapper {
+                width: 280px;
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .photo-wrapper {
+                width: 220px;
+                height: 220px;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .float-icon {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="particles-container" id="particles"></div>
 
-    <main class="section fade-in">
-        <div class="container hero">
-            <div class="hero-content">
-                <span class="hero-subtitle fade-in delay-1">Hello, I'm</span>
-                <h1 class="hero-title fade-in delay-1">
-                    Jeevitha K S
-                </h1>
-                <h2 class="hero-title text-gradient fade-in delay-2" style="font-size: 2.5rem; margin-bottom: 1.5rem;">
-                    Building digital experiences.
-                </h2>
-                <p class="hero-desc fade-in delay-2">
-                    I'm a passionate professional dedicated to creating beautiful, functional, and user-centric solutions. Explore my profile and let's build something amazing together.
-                </p>
-                <div class="hero-actions fade-in delay-3">
-                    <a href="about.html" class="btn btn-primary">About Me</a>
-                    <a href="contact.html" class="btn btn-outline">Contact Me</a>
+    <main class="page-content">
+        <section class="hero">
+            <div class="hero-container">
+                <!-- Left Content -->
+                <div class="hero-content">
+                    <p class="hero-greeting fade-up">Welcome to my world</p>
+                    <h1 class="hero-name fade-up delay-1">
+                        <span class="first-name">Meenakumari</span>
+                        <span class="last-name">B.M</span>
+                    </h1>
+                    <p class="hero-role fade-up delay-2">
+                        <span id="typingText"></span><span class="typing-cursor"></span>
+                    </p>
+                    <p class="hero-desc fade-up delay-3">
+                        Aspiring professional with a strong desire to redefine standards through excellent communication, leadership, and a commitment to continuous learning.
+                    </p>
+                    <div class="hero-actions fade-up delay-4">
+                        <a href="about.html" class="btn btn-primary">
+                            <span>Discover More</span>
+                            <span>→</span>
+                        </a>
+                        <a href="meena123.docx" download class="btn btn-outline">
+                            <span>📄</span>
+                            <span>Download Resume</span>
+                        </a>
+                    </div>
+                    <div class="hero-stats fade-up delay-5">
+                        <div class="stat">
+                            <div class="stat-number">BCA</div>
+                            <div class="stat-label">Pursuing</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">7.7</div>
+                            <div class="stat-label">CGPA</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">80%</div>
+                            <div class="stat-label">SSLC</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right - Photo -->
+                <div class="hero-visual fade-up delay-2">
+                    <div class="hero-dots hero-dots-1"></div>
+                    <div class="hero-dots hero-dots-2"></div>
+                    <div class="float-icon float-icon-1">💻</div>
+                    <div class="float-icon float-icon-2">🎓</div>
+                    <div class="float-icon float-icon-3">✨</div>
+                    <div class="photo-wrapper">
+                        <div class="photo-ring">
+                            <div class="photo-ring-inner"></div>
+                        </div>
+                        <div class="photo-container">
+                            <img src="WhatsApp Image 2026-05-14 at 5.31.58 AM.jpeg" alt="Meenakumari B.M - Professional Photo">
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="hero-image-wrapper fade-in delay-1">
-                <div class="hero-blob"></div>
-                <img src="jeevi1711.jpeg" alt="Jeevitha K S" class="hero-image">
+
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <div class="scroll-mouse"></div>
+                <span>Scroll</span>
             </div>
-        </div>
+        </section>
     </main>
 
     <script src="layout.js"></script>
+    <script>
+        // Typing Effect
+        const roles = ['BCA Student', 'Future Educator', 'Tech Enthusiast', 'Lifelong Learner'];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingEl = document.getElementById('typingText');
+
+        function typeEffect() {
+            const currentRole = roles[roleIndex];
+
+            if (isDeleting) {
+                typingEl.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingEl.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let speed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                speed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                speed = 500;
+            }
+
+            setTimeout(typeEffect, speed);
+        }
+
+        typeEffect();
+
+        // Particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (6 + Math.random() * 6) + 's';
+            particle.style.width = (2 + Math.random() * 3) + 'px';
+            particle.style.height = particle.style.width;
+            const colors = ['var(--accent-primary)', 'var(--accent-secondary)', 'var(--accent-tertiary)'];
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            particlesContainer.appendChild(particle);
+        }
+    </script>
 </body>
 </html>
